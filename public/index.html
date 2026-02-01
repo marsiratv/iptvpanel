@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IPTV Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h2>📺 IPTV Panel</h2>
+        <div class="nav-right">
+            <span id="stats"></span>
+            <button id="logout">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="totalPlaylists">0</h3>
+                <p>Total Playlists</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="totalCredits">0</h3>
+                <p>Total Credits</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="playlists">Playlists</button>
+            <button class="tab-btn" data-tab="credits">Kelola Credits</button>
+            <?php if(isAdmin): ?>
+            <button class="tab-btn" data-tab="add">Tambah Playlist</button>
+            <?php endif; ?>
+        </div>
+
+        <!-- Playlists Tab -->
+        <div id="playlists" class="tab-content active">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>URL/File</th>
+                            <th>Status</th>
+                            <th>Credits</th>
+                        </tr>
+                    </thead>
+                    <tbody id="playlistTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Credits Tab -->
+        <div id="credits" class="tab-content">
+            <div class="form-group">
+                <input type="text" id="creditUsername" placeholder="Username">
+                <button onclick="loadUserCredits()">Cek Credits</button>
+            </div>
+            <div id="userCredits"></div>
+        </div>
+
+        <!-- Add Playlist Tab (Admin) -->
+        <div id="add" class="tab-content">
+            <div class="form-section">
+                <h3>Tambah Playlist</h3>
+                <form id="playlistForm">
+                    <input type="text" id="playlistName" placeholder="Nama Playlist" required>
+                    <input type="url" id="playlistUrl" placeholder="URL M3U (opsional)">
+                    <input type="file" id="m3uFile" accept=".m3u,.m3u8">
+                    <button type="submit">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/iptv.js"></script>
+</body>
+</html>
